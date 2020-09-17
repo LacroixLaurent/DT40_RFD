@@ -7,7 +7,7 @@ genome <- BSgenome.Ggallus.UCSC.galGal4
 seqinf <- seqinfo(genome)
 
 ### Set your working path
-mypath <- "/Users/ll/work/Ori/ArticleBLT/NAR/"
+mypath <- "TypeYourPathHere"
 setwd(mypath)
 
 ### Import home made function
@@ -30,7 +30,7 @@ gr_ccser1 <- gra_ccser1[gra_ccser1 %within% CCSER1]
 
 ### work on DMD
 
-# compute RFD for OKseq and SM at 1 and 10 kb (and 20?)
+# compute RFD for OKseq and SM  without binning and with 10 kb bins
 
 sm.wtdmd.nt <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=3,outname='wtDMD',bs=10000,na2zero=F,bin=F,expor=T,saverdata=F)
 
@@ -46,26 +46,26 @@ sm.tetdmd.10k <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuil
 res_10k_dmdlarge <- makeRFD(gra_dmd,bs=10000,lr=0,na2zero=F,bin=T,datatype='OKseq',export=T,saveRData=F,retur=T,outname='DT40_OK_DMDlarge',OKcheck=F)
 ## and for just DMD
 res_10k_dmd <- makeRFD(gr_dmd,bs=10000,lr=0,na2zero=F,bin=T,datatype='OKseq',export=T,saveRData=F,retur=T,outname='DT40_OK_DMD',OKcheck=F)
-### compute correlation 
+### compute correlation
 cor.rfd.test2(res_10k_dmd[[4]], sm.wtdmd.10k[[4]],bs0=10000,binned=T)
 #	Spearman's rank correlation rho
 #data:  as.numeric(unlist(a)[!is.na(unlist(a)) & !is.na(unlist(b))]) and as.numeric(unlist(b)[!is.na(unlist(a)) & !is.na(unlist(b))])
 #S = 39127, p-value < 2.2e-16
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
-#      rho 
-#0.8136212 
+#      rho
+#0.8136212
 
 
-### try to evaluate the subsamplig required to get the same coverage as the combing RF
+### try to evaluate the subsampling required to get the same coverage as the combing RFD
 
 sm.dmd.cv.10k <- sm.wtdmd.10k[[1]][DMD][[1]]
 summary(sm.dmd.cv.10k)
-#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
 #   14.0    21.0    26.0    24.9    29.0    36.0
 
 
-### let do 100 sampling at the right sampling
+### 100 sampling taking 2500 reads mapping on the ROI
 n=2500
 bs=10000
 set.seed(42)
@@ -98,7 +98,7 @@ runLength(smdata2.cov) <- runLength(smdata.cov)/bs
 xmin <- 11388
 xmax <-11495
 
-pdf(file="subsample_DMD_10k.pdf",heigh=4,width=6)
+pdf(file="subsample_DMD_10k.pdf",height=4,width=6)
 plot(smdata2,x=(xmin:xmax),col="red",type="l",lwd=2,ylim=c(-1,1),ylab="RFD",xlab="coordinates (chr1, *10kb)")
 dummy <- lapply(dmd.rfds10k, function(y) lines(y,x=(xmin:xmax),col=rgb(0,0,1,0.2)))
 lines(smdata2,x=(xmin:xmax),col="red",type="l",lwd=2)
@@ -171,8 +171,8 @@ cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #S = 906425, p-value = 6.527e-11
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
-#      rho 
-#0.4291981 
+#      rho
+#0.4291981
 
 # TET DMD
 cvL <- sm.tetdmd.10k[[2]]
@@ -192,13 +192,13 @@ cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #S = 664755, p-value < 2.2e-16
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
-#      rho 
-#0.5813848 
+#      rho
+#0.5813848
 
 
 ## for CCSER1
 
-### compute RFD for SM 
+### compute RFD for SM
 
 sm.wtccser1.nt <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=1,outname='wtCCSER1',bs=10000,na2zero=T,bin=F,expor=T,saverdata=F)
 
@@ -215,7 +215,7 @@ res_10k_ccser1large <- makeRFD(gra_ccser1,bs=10000,lr=0,na2zero=F,bin=T,datatype
 ## just CCSER1
 res_10k_ccser1 <- makeRFD(gr_ccser1,bs=10000,lr=0,na2zero=F,bin=T,datatype='OKseq',export=T,saveRData=F,retur=T,outname='DT40_OK_CCSER1',OKcheck=F)
 
-## compute correlation 
+## compute correlation
 
 cor.rfd.test2(res_10k_ccser1[[4]], sm.wtccser1.10k[[4]],bs0=10000,binned=T)
 #	Spearman's rank correlation rho
@@ -223,12 +223,11 @@ cor.rfd.test2(res_10k_ccser1[[4]], sm.wtccser1.10k[[4]],bs0=10000,binned=T)
 #S = 20352, p-value = 4.244e-10
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
-#      rho 
-#0.6587569 
+#      rho
+#0.6587569
 
 
-### Subsampling plot
-
+### Subsampling
 n=2500
 bs=10000
 set.seed(42)
@@ -261,7 +260,7 @@ runLength(smdata2.cov) <- runLength(smdata.cov)/bs
 xmin <- 34950000/bs
 xmax <- 35660000/bs-1
 
-pdf(file="subsample_CCSER1_10k.pdf",heigh=4,width=6)
+pdf(file="subsample_CCSER1_10k.pdf",height=4,width=6)
 plot(smdata2,x=(xmin:xmax),col="red",type="l",lwd=2,ylim=c(-1,1),ylab="RFD",xlab="coordinates (chr4, *10kb)")
 dummy <- lapply(ccsser1.rfds10k, function(y) lines(y,x=(xmin:xmax),col=rgb(0,0,1,0.2)))
 lines(smdata2,x=(xmin:xmax),col="red",type="l",lwd=2)
@@ -274,7 +273,6 @@ legend('topright',legend=c('subsampled(n=2500)','single molecule'), text.col=c('
 dev.off()
 
 ### REM and OEM
-
 ori_ccser1 <- import("data/Ori_wtCCSER1_sondes.bed")
 ter_ccser1 <- import("data/Ter_wtCCSER1_sondes.bed")
 seqlevels(ori_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
@@ -319,7 +317,6 @@ export(cvccser110krem_beta,con="REM_BETACCSER1_10k.bw")
 
 ## OEM
 ## at 10k on 10k RFD
-
 ## for SM
 win=10000
 cvL <- sm.wtccser1.10k[[2]]
@@ -339,8 +336,8 @@ cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #S = 198105, p-value = 3.604e-12
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
-#      rho 
-#0.5476937 
+#      rho
+#0.5476937
 
 cvL <- sm.betaccser1.10k[[2]]
 cvT <- sm.betaccser1.10k[[1]]
@@ -359,6 +356,6 @@ cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #S = 179042, p-value = 2.27e-14
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
-#      rho 
-#0.5912191 
+#      rho
+#0.5912191
 
