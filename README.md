@@ -1,7 +1,8 @@
----
-title: "Data analysis for DT40 Single Molecule RFD studies"
-author: "Laurent Lacroix (laurent.lacroix@inserm.fr)"
----
+
+
+# Data analysis for DT40 Single Molecule RFD studies
+## Laurent Lacroix (laurent.lacroix@inserm.fr)
+
 
 ### Scripts used for figures and analysis in Blin et al 2020
 
