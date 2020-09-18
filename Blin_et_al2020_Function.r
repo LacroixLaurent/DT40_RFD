@@ -67,7 +67,7 @@ if (na2zero)
 	RFD2[is.na(RFD2)] <- 0
 	naname <- '_noNA'
 	}
-# Option to export resuls into BigWig files
+# Option to export results into BigWig files
 if (export)
 	{
 		rtracklayer::export(cv,con=paste0(outname,'_cov_tot_bs',bs/1000,'k_lr',lr,'.bw'))
@@ -129,7 +129,7 @@ if (na2zero)
 
 res <- list(df1.cv,df1.cvL,df1.cvR,df1.RFD,df1.GR)
 names(res) <- c("cv","cvL","cvR","RFD","forks")
-# Option to export resuls into BigWig files
+# Option to export results into BigWig files
 if (expor==T)
 {
 export(df1.RFD,con=paste0(outname,'_RFD_bs',bs/1000,'k.bw'))
