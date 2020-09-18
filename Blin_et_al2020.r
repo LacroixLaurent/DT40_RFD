@@ -111,6 +111,7 @@ legend('topright',legend=c('subsampled(n=2500)','single molecule'), text.col=c('
 dev.off()
 
 ### REM and OEM
+## REM
 # WT DMD
 ori_dmd <- import("data/Ini_wtDMD.bed")
 ter_dmd <- import("data/Ter_wtDMD.bed")
@@ -198,7 +199,7 @@ cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 
 ## for CCSER1
 
-### compute RFD for SM
+### compute RFD for SM  without binning and with 10 kb bins
 
 sm.wtccser1.nt <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=1,outname='wtCCSER1',bs=10000,na2zero=T,bin=F,expor=T,saverdata=F)
 
@@ -208,7 +209,7 @@ sm.betaccser1.nt <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuil
 
 sm.betaccser1.10k <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=2,outname='betaCCSER1',bs=10000,na2zero=T,bin=T,expor=T,saverdata=F)
 
-# and OKseq
+# and OKseq with 10kb bins
 ## larger CCSER1 ROI
 res_10k_ccser1large <- makeRFD(gra_ccser1,bs=10000,lr=0,na2zero=F,bin=T,datatype='OKseq',export=T,saveRData=F,retur=T,outname='DT40_OK_CCSER1large',OKcheck=F)
 ## just CCSER1
@@ -272,6 +273,7 @@ legend('topright',legend=c('subsampled(n=2500)','single molecule'), text.col=c('
 dev.off()
 
 ### REM and OEM
+## REM
 ori_ccser1 <- import("data/Ini_wtCCSER1.bed")
 ter_ccser1 <- import("data/Ter_wtCCSER1.bed")
 seqlevels(ori_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
