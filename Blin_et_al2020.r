@@ -32,13 +32,13 @@ gr_ccser1 <- gra_ccser1[gra_ccser1 %within% CCSER1]
 
 # compute RFD for OKseq and SM  without binning and with 10 kb bins
 
-sm.wtdmd.nt <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=3,outname='wtDMD',bs=10000,na2zero=F,bin=F,expor=T,saverdata=F)
+sm.wtdmd.nt <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=3,outname='wtDMD',bs=10000,na2zero=F,bin=F,expor=T,saverdata=F)
 
-sm.wtdmd.10k <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=3,outname='wtDMD',bs=10000,na2zero=F,bin=T,expor=T,saverdata=F)
+sm.wtdmd.10k <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=3,outname='wtDMD',bs=10000,na2zero=F,bin=T,expor=T,saverdata=F)
 
-sm.tetdmd.nt <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=4,outname='tetDMD',bs=10000,na2zero=F,bin=F,expor=T,saverdata=F)
+sm.tetdmd.nt <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=4,outname='tetDMD',bs=10000,na2zero=F,bin=F,expor=T,saverdata=F)
 
-sm.tetdmd.10k <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=4,outname='tetDMD',bs=10000,na2zero=F,bin=T,expor=T,saverdata=F)
+sm.tetdmd.10k <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=4,outname='tetDMD',bs=10000,na2zero=F,bin=T,expor=T,saverdata=F)
 
 
 # and OKseq
@@ -112,8 +112,8 @@ dev.off()
 
 ### REM and OEM
 # WT DMD
-ori_dmd <- import("data/Ori_wtDMD_sondes.bed")
-ter_dmd <- import("data/Ter_wtDMD_sondes.bed")
+ori_dmd <- import("data/Ini_wtDMD.bed")
+ter_dmd <- import("data/Ter_wtDMD.bed")
 seqinfo(ori_dmd) <- seqinf
 seqinfo(ter_dmd) <- seqinf
 ori_dmd <- resize(ori_dmd,fix="center",width=1)
@@ -131,8 +131,8 @@ cvdmd10krem_wt <- coverage(dmd10k,weight=dmd10k$rem)
 export(cvdmd10krem_wt,con="REM_WTDMD_10k.bw")
 
 # TET DMD
-ori_dmd <- import("data/Ori_tetDMD_sondes.bed")
-ter_dmd <- import("data/Ter_tetDMD_sondes.bed")
+ori_dmd <- import("data/Ini_tetDMD.bed")
+ter_dmd <- import("data/Ter_tetDMD.bed")
 seqinfo(ori_dmd) <- seqinf
 seqinfo(ter_dmd) <- seqinf
 ori_dmd <- resize(ori_dmd,fix="center",width=1)
@@ -200,14 +200,13 @@ cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 
 ### compute RFD for SM
 
-sm.wtccser1.nt <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=1,outname='wtCCSER1',bs=10000,na2zero=T,bin=F,expor=T,saverdata=F)
+sm.wtccser1.nt <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=1,outname='wtCCSER1',bs=10000,na2zero=T,bin=F,expor=T,saverdata=F)
 
-sm.wtccser1.10k <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=1,outname='wtCCSER1',bs=10000,na2zero=T,bin=T,expor=T,saverdata=F)
+sm.wtccser1.10k <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=1,outname='wtCCSER1',bs=10000,na2zero=T,bin=T,expor=T,saverdata=F)
 
+sm.betaccser1.nt <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=2,outname='betaCCSER1',bs=10000,na2zero=T,bin=F,expor=T,saverdata=F)
 
-sm.betaccser1.nt <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=2,outname='betaCCSER1',bs=10000,na2zero=T,bin=F,expor=T,saverdata=F)
-
-sm.betaccser1.10k <- XLSX_track_import(xlfile="data/Coordonnees_polarite.xlsx",feuille=2,outname='betaCCSER1',bs=10000,na2zero=T,bin=T,expor=T,saverdata=F)
+sm.betaccser1.10k <- XLSX_track_import(xlfile="data/Track_coordinates.xlsx",feuille=2,outname='betaCCSER1',bs=10000,na2zero=T,bin=T,expor=T,saverdata=F)
 
 # and OKseq
 ## larger CCSER1 ROI
@@ -273,8 +272,8 @@ legend('topright',legend=c('subsampled(n=2500)','single molecule'), text.col=c('
 dev.off()
 
 ### REM and OEM
-ori_ccser1 <- import("data/Ori_wtCCSER1_sondes.bed")
-ter_ccser1 <- import("data/Ter_wtCCSER1_sondes.bed")
+ori_ccser1 <- import("data/Ini_wtCCSER1.bed")
+ter_ccser1 <- import("data/Ter_wtCCSER1.bed")
 seqlevels(ori_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
 seqinfo(ori_ccser1) <- seqinf
 seqlevels(ter_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
@@ -295,8 +294,8 @@ cvccser110krem_wt <- coverage(ccser110k,weight=ccser110k$rem)
 export(cvccser110krem_wt,con="REM_WTCCSER1_10k.bw")
 
 
-ori_ccser1 <- import("data/Ori_betaCCSER1_sondes.bed")
-ter_ccser1 <- import("data/Ter_betaCCSER1_sondes.bed")
+ori_ccser1 <- import("data/Ini_betaCCSER1.bed")
+ter_ccser1 <- import("data/Ter_betaCCSER1.bed")
 seqlevels(ori_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
 seqinfo(ori_ccser1) <- seqinf
 seqlevels(ter_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
