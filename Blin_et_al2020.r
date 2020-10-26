@@ -392,3 +392,7 @@ gr_dmd_g6 <- gra_dmd_g6[gra_dmd_g6 %within% DMD_g6]
 res_10k_dmd_g6 <- makeRFD(gr_dmd_g6,bs=10000,lr=20,na2zero=F,bin=T,datatype="OKseq",export=T,saveRData=F,retur=T,outname="results/DT40_OK_DMD_galGal6",OKcheck=F)
 
 res_10k_dmdexp_g6 <- makeRFD(gra_dmd_g6,bs=10000,lr=20,na2zero=F,bin=T,datatype="OKseq",export=T,saveRData=F,retur=T,outname="results/DT40_OK_DMDlarge_galGal6",OKcheck=F)
+
+library("devtools")
+library(magrittr)
+session_info() %>% capture.output(file="session_info.txt")
