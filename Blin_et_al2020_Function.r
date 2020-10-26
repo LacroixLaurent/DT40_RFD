@@ -1,5 +1,5 @@
 ## helper function for Blin et al 2020
-## LL 20200917
+## LL 20201026
 ## laurent.lacroix@inserm.fr
 
 library(GenomicAlignments)
@@ -101,7 +101,7 @@ df1.GR <- sort(GRanges(seqnames=df1$Chromosome,ranges=IRanges(df1$start,df1$end)
 return(df1.GR)
 }
 
-### a function to check correlation genome-wide between RFD disregarding places with NA 
+### a function to check correlation genome-wide between RFD disregarding places with NA
 ### for binned values
 cor.rfd.test2 <- function(a,b,met='s',binned=T,bs0=bs,...)
 {
