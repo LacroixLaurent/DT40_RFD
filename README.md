@@ -21,24 +21,24 @@ Data were mapped either on *galGal4* or *galGal6* genome using *bwa mem -M*, con
 Typical results are in the *results/* folder.  
 
 *sessionInfo()*
-R version 4.0.3 (2020-10-10)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Catalina 10.15.7
+R version 4.0.3 (2020-10-10)  
+Platform: x86_64-apple-darwin17.0 (64-bit)  
+Running under: macOS Catalina 10.15.7  
 
-Matrix products: default
-BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+Matrix products: default  
+BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib  
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib  
 
-locale:
-[1] fr_FR.UTF-8/fr_FR.UTF-8/fr_FR.UTF-8/C/fr_FR.UTF-8/fr_FR.UTF-8
+locale:  
+[1] fr_FR.UTF-8/fr_FR.UTF-8/fr_FR.UTF-8/C/fr_FR.UTF-8/fr_FR.UTF-8  
 
-attached base packages:
+attached base packages:  
 [1] stats4    parallel  stats     graphics  grDevices utils     datasets  methods  
 [9] base     
 
-other attached packages:
- [1] BSgenome.Ggallus.UCSC.galGal6_1.4.2 openxlsx_4.2.2                     
- [3] GenomicAlignments_1.24.0            Rsamtools_2.4.0                    
+other attached packages:  
+ [1] BSgenome.Ggallus.UCSC.galGal6_1.4.2	openxlsx_4.2.2                     
+ [3] GenomicAlignments_1.24.0	Rsamtools_2.4.0                    
  [5] SummarizedExperiment_1.18.2         DelayedArray_0.14.1                
  [7] matrixStats_0.57.0                  Biobase_2.48.0                     
  [9] BSgenome.Ggallus.UCSC.galGal4_1.4.0 BSgenome_1.56.0                    
