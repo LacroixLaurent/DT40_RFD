@@ -37,17 +37,17 @@ attached base packages:
 [9] base     
 
 other attached packages:  
- [1] BSgenome.Ggallus.UCSC.galGal6_1.4.2	openxlsx_4.2.2                     
- [3] GenomicAlignments_1.24.0	Rsamtools_2.4.0                    
+ [1] BSgenome.Ggallus.UCSC.galGal6_1.4.2 openxlsx_4.2.2                     
+ [3] GenomicAlignments_1.24.0            Rsamtools_2.4.0                    
  [5] SummarizedExperiment_1.18.2         DelayedArray_0.14.1                
  [7] matrixStats_0.57.0                  Biobase_2.48.0                     
  [9] BSgenome.Ggallus.UCSC.galGal4_1.4.0 BSgenome_1.56.0                    
 [11] rtracklayer_1.48.0                  Biostrings_2.56.0                  
 [13] XVector_0.28.0                      GenomicRanges_1.40.0               
 [15] GenomeInfoDb_1.24.2                 IRanges_2.22.2                     
-[17] S4Vectors_0.26.1                    BiocGenerics_0.34.0                
+[17] S4Vectors_0.26.1                    BiocGenerics_0.34.0   
 
-loaded via a namespace (and not attached):
+loaded via a namespace (and not attached):  
  [1] Rcpp_1.0.5             rstudioapi_0.11        zlibbioc_1.34.0       
  [4] BiocParallel_1.22.0    lattice_0.20-41        tools_4.0.3           
  [7] grid_4.0.3             crayon_1.3.4           zip_2.1.1             
