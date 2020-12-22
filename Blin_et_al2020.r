@@ -374,25 +374,6 @@ cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #      rho
 #0.5912191
 
-### RFD for OK seq data mapped on galGal6
-
-library("BSgenome.Ggallus.UCSC.galGal6")
-genome <- BSgenome.Ggallus.UCSC.galGal6
-seqinf_g6 <- seqinfo(genome)
-seqlevels(seqinf_g6) <- seqlevels(seqinf_g6)[1:35]
-
-DMD_g6 <- GRanges(seqnames="chr1",ranges=IRanges(start=116170001,end=117250000), strand="*",seqinfo=seqinf_g6)
-DMDexp_g6 <- DMD+500000
-
-gra_dmd_g6 <- import("data/galGal6_DMD_OKreads_exp.bed")
-seqlevels(gra_dmd_g6,pruning.mode="coarse") <- seqlevels(seqinf_g6)
-seqinfo(gra_dmd_g6) <- seqinf_g6
-gr_dmd_g6 <- gra_dmd_g6[gra_dmd_g6 %within% DMD_g6]
-
-res_10k_dmd_g6 <- makeRFD(gr_dmd_g6,bs=10000,lr=20,na2zero=F,bin=T,datatype="OKseq",export=T,saveRData=F,retur=T,outname="results/DT40_OK_DMD_galGal6",OKcheck=F)
-
-res_10k_dmdexp_g6 <- makeRFD(gra_dmd_g6,bs=10000,lr=20,na2zero=F,bin=T,datatype="OKseq",export=T,saveRData=F,retur=T,outname="results/DT40_OK_DMDlarge_galGal6",OKcheck=F)
-
 library("devtools")
 library(magrittr)
 session_info() %>% capture.output(file="session_info.txt")
