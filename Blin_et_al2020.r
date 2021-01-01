@@ -1,5 +1,5 @@
 #### Data treatment for Blin et al 2020
-### LL 20201026
+### LL 20210101
 ### laurent.lacroix@inserm.fr
 
 library("BSgenome.Ggallus.UCSC.galGal4")
@@ -374,6 +374,64 @@ cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #      rho
 #0.5912191
 
+### Adding two OK seq replicates
+gra14_dmd <- import("data/E14_galGal4_DMD_OKreads_exp.bed")
+seqlevels(gra14_dmd,pruning.mode="coarse") <- seqlevels(seqinf)
+seqinfo(gra14_dmd) <- seqinf
+gra14_ccser1 <- import("data/E14_galGal4_CCSER1_OKreads_exp.bed")
+seqlevels(gra14_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
+seqinfo(gra14_ccser1) <- seqinf
+gra15_dmd <- import("data/E15_galGal4_DMD_OKreads_exp.bed")
+seqlevels(gra15_dmd,pruning.mode="coarse") <- seqlevels(seqinf)
+seqinfo(gra15_dmd) <- seqinf
+gra15_ccser1 <- import("data/E15_galGal4_CCSER1_OKreads_exp.bed")
+seqlevels(gra15_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
+seqinfo(gra15_ccser1) <- seqinf
+
+grE14_dmd <- graE14_dmd[graE14_dmd %within% DMD]
+grE14_ccser1 <- graE14_ccser1[graE14_ccser1 %within% CCSER1]
+grE15_dmd <- graE15_dmd[graE15_dmd %within% DMD]
+grE15_ccser1 <- graE15_ccser1[graE15_ccser1 %within% CCSER1]
+
+res_10k_dmdE14 <- makeRFD(grE14_dmd,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=F,saveRData=F,retur=T,outname='DT40_OK_DMD_galGal4',OKcheck=F)
+
+res_10k_dmdE15 <- makeRFD(grE15_dmd,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=F,saveRData=F,retur=T,outname='DT40_OK_DMD_galGal4',OKcheck=F)
+
+
+cor.rfd.test2(sm.wtdmd.10k[[4]], res_10k_dmdE14[[4]],bs0=10000,binned=T)
+#      rho
+#0.8118004
+cor.rfd.test2(sm.wtdmd.10k[[4]], res_10k_dmdE15[[4]],bs0=10000,binned=T)
+#      rho
+#0.8223484
+
+cor.rfd.test2(res_10k_dmd[[4]], res_10k_dmdE14[[4]],bs0=10000,binned=T)
+# 0.8818358
+cor.rfd.test2(res_10k_dmd[[4]], res_10k_dmdE15[[4]],bs0=10000,binned=T)
+# 0.8572687
+cor.rfd.test2(res_10k_dmdE14[[4]], res_10k_dmdE15[[4]],bs0=10000,binned=T)
+# 0.87142
+
+res_10k_ccser1E14 <- makeRFD(grE14_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=F,saveRData=F,retur=T,outname='DT40_OK_CCSER1_galGal4',OKcheck=F)
+
+res_10k_ccser1E15 <- makeRFD(grE15_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=F,saveRData=F,retur=T,outname='DT40_OK_CCSER1_galGal4',OKcheck=F)
+
+
+cor.rfd.test2(sm.wtccser1.10k[[4]], res_10k_ccser1E14[[4]],bs0=10000,binned=T)
+#      rho
+#0.6445024
+cor.rfd.test2(sm.wtccser1.10k[[4]], res_10k_ccser1E15[[4]],bs0=10000,binned=T)
+#      rho
+#0.6525184
+
+cor.rfd.test2(res_10k_ccser1[[4]], res_10k_ccser1E14[[4]],bs0=10000,binned=T)
+# .9661972
+cor.rfd.test2(res_10k_ccser1[[4]], res_10k_ccser1E15[[4]],bs0=10000,binned=T)
+# 0.9765258
+cor.rfd.test2(res_10k_ccser1E14[[4]], res_10k_ccser1E15[[4]],bs0=10000,binned=T)
+# 0.9672703
+
+### exporting session info
 library("devtools")
 library(magrittr)
 session_info() %>% capture.output(file="session_info.txt")
