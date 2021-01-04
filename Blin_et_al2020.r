@@ -413,9 +413,9 @@ cor.rfd.test2(res_10k_dmd[[4]], res_10k_dmdE15[[4]],bs0=10000,binned=T)
 cor.rfd.test2(res_10k_dmdE14[[4]], res_10k_dmdE15[[4]],bs0=10000,binned=T)
 # 0.87142
 
-res_10k_ccser1E14 <- makeRFD(grE14_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=F,saveRData=F,retur=T,outname='DT40_OK_CCSER1_galGal4',OKcheck=F)
+res_10k_ccser1E14 <- makeRFD(grE14_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=T,saveRData=F,retur=T,outname='results/E14_DT40_OK_CCSER1_galGal4',OKcheck=F)
 
-res_10k_ccser1E15 <- makeRFD(grE15_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=F,saveRData=F,retur=T,outname='DT40_OK_CCSER1_galGal4',OKcheck=F)
+res_10k_ccser1E15 <- makeRFD(grE15_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=T,saveRData=F,retur=T,outname='results/E15_DT40_OK_CCSER1_galGal4',OKcheck=F)
 
 
 cor.rfd.test2(sm.wtccser1.10k[[4]], res_10k_ccser1E14[[4]],bs0=10000,binned=T)
