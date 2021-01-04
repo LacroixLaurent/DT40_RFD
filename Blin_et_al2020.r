@@ -8,6 +8,7 @@ seqinf <- seqinfo(genome)
 
 ### Set your working path
 mypath <- "TypeYourPathHere"
+# mypath <- ""
 setwd(mypath)
 
 ### Import home made function
@@ -388,14 +389,14 @@ gra15_ccser1 <- import("data/E15_galGal4_CCSER1_OKreads_exp.bed")
 seqlevels(gra15_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
 seqinfo(gra15_ccser1) <- seqinf
 
-grE14_dmd <- graE14_dmd[graE14_dmd %within% DMD]
-grE14_ccser1 <- graE14_ccser1[graE14_ccser1 %within% CCSER1]
-grE15_dmd <- graE15_dmd[graE15_dmd %within% DMD]
-grE15_ccser1 <- graE15_ccser1[graE15_ccser1 %within% CCSER1]
+grE14_dmd <- gra14_dmd[gra14_dmd %within% DMD]
+grE14_ccser1 <- gra14_ccser1[gra14_ccser1 %within% CCSER1]
+grE15_dmd <- gra15_dmd[gra15_dmd %within% DMD]
+grE15_ccser1 <- gra15_ccser1[gra15_ccser1 %within% CCSER1]
 
-res_10k_dmdE14 <- makeRFD(grE14_dmd,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=F,saveRData=F,retur=T,outname='DT40_OK_DMD_galGal4',OKcheck=F)
+res_10k_dmdE14 <- makeRFD(grE14_dmd,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=T,saveRData=F,retur=T,outname="results/E14_DT40_OK_DMD_galGal4",OKcheck=F)
 
-res_10k_dmdE15 <- makeRFD(grE15_dmd,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=F,saveRData=F,retur=T,outname='DT40_OK_DMD_galGal4',OKcheck=F)
+res_10k_dmdE15 <- makeRFD(grE15_dmd,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=T,saveRData=F,retur=T,outname="results/E15_DT40_OK_DMD_galGal4",OKcheck=F)
 
 
 cor.rfd.test2(sm.wtdmd.10k[[4]], res_10k_dmdE14[[4]],bs0=10000,binned=T)
