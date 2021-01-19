@@ -1,4 +1,4 @@
-## helper function for Blin et al 2020
+## helper functions for Blin et al 2021
 ## LL 20201026
 ## laurent.lacroix@inserm.fr
 

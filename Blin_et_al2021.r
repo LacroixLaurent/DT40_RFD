@@ -1,5 +1,5 @@
-#### Data treatment for Blin et al 2020
-### LL 20210101
+#### Data treatment for Blin et al 2021
+### LL 20210119
 ### laurent.lacroix@inserm.fr
 
 library("BSgenome.Ggallus.UCSC.galGal4")
@@ -12,7 +12,7 @@ mypath <- "TypeYourPathHere"
 setwd(mypath)
 
 ### Import home made function
-source(paste0(mypath,"Blin_et_al2020_Function.r"))
+source(paste0(mypath,"Blin_et_al2021_Function.r"))
 
 
 ### set coordinates for the region of interest
@@ -20,10 +20,10 @@ DMD <- GRanges(seqnames="chr1",ranges=IRanges(start=113880001,end=114960000), st
 CCSER1 <- GRanges(seqnames="chr4",ranges=IRanges(start=34950001,end=35660000), strand="*",seqinfo=seqinf)
 
 ## Import OKseq reads
-gra_dmd <- import("data/galGal4_DMD_OKreads_exp.bed")
+gra_dmd <- import("data/O1_galGal4_DMD_OKreads_exp.bed")
 seqlevels(gra_dmd,pruning.mode="coarse") <- seqlevels(seqinf)
 seqinfo(gra_dmd) <- seqinf
-gra_ccser1 <- import("data/galGal4_CCSER1_OKreads_exp.bed")
+gra_ccser1 <- import("data/O1_galGal4_CCSER1_OKreads_exp.bed")
 seqlevels(gra_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
 seqinfo(gra_ccser1) <- seqinf
 
@@ -83,7 +83,7 @@ set.seed(42)
 res_list10k <- mclapply(1:100, function(i)
 {gr_dmd_sub <- sample(gr_dmd,n)
 resall_dmd_sub <- makeRFD(gr_dmd_sub,bs=bs0,lr=0,na2zero=F,bin=T,datatype="OKseq",export=F,saveRData=F,retur=T,OKcheck=F)},mc.cores=4L)
-save(res_list10k,file="res_list10k_DMD_galGal4.RData")
+save(res_list10k,file="results/res_list10k_DMD_galGal4.RData")
 
 dmd.rfds10k <- lapply(res_list10k, function(x) {
 	y <- x[[4]][DMD][[1]]
@@ -252,7 +252,7 @@ set.seed(42)
 res_list10kc <- mclapply(1:100, function(i)
 {gr_ccser1_sub <- sample(gr_ccser1,n)
 resall_ccser1_sub <- makeRFD(gr_ccser1_sub,bs=bs0,lr=0,na2zero=F,bin=T,datatype="OKseq",export=F,saveRData=F,retur=T,OKcheck=F)},mc.cores=4L)
-save(res_list10kc,file="res_list10k_CCSER1_galGal4.RData")
+save(res_list10kc,file="results/res_list10k_CCSER1_galGal4.RData")
 
 ccsser1.rfds10k <- lapply(res_list10kc, function(x) {
 	y <- x[[4]][CCSER1][[1]]
@@ -401,17 +401,17 @@ res_10k_dmdE15 <- makeRFD(grE15_dmd,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKs
 
 cor.rfd.test2(sm.wtdmd.10k[[4]], res_10k_dmdE14[[4]],bs0=10000,binned=T)
 #      rho
-#0.8118004
+#0.8112955
 cor.rfd.test2(sm.wtdmd.10k[[4]], res_10k_dmdE15[[4]],bs0=10000,binned=T)
 #      rho
-#0.8223484
+#0.822747
 
 cor.rfd.test2(res_10k_dmd[[4]], res_10k_dmdE14[[4]],bs0=10000,binned=T)
-# 0.8818358
+# 0.8799019
 cor.rfd.test2(res_10k_dmd[[4]], res_10k_dmdE15[[4]],bs0=10000,binned=T)
-# 0.8572687
+# 0.8564882
 cor.rfd.test2(res_10k_dmdE14[[4]], res_10k_dmdE15[[4]],bs0=10000,binned=T)
-# 0.87142
+# 0.8684934
 
 res_10k_ccser1E14 <- makeRFD(grE14_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKseq',export=T,saveRData=F,retur=T,outname='results/E14_DT40_OK_CCSER1_galGal4',OKcheck=F)
 
@@ -420,17 +420,17 @@ res_10k_ccser1E15 <- makeRFD(grE15_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatyp
 
 cor.rfd.test2(sm.wtccser1.10k[[4]], res_10k_ccser1E14[[4]],bs0=10000,binned=T)
 #      rho
-#0.6445024
+#0.6452906
 cor.rfd.test2(sm.wtccser1.10k[[4]], res_10k_ccser1E15[[4]],bs0=10000,binned=T)
 #      rho
-#0.6525184
+#0.6521663
 
 cor.rfd.test2(res_10k_ccser1[[4]], res_10k_ccser1E14[[4]],bs0=10000,binned=T)
-# .9661972
+# .0.9676727
 cor.rfd.test2(res_10k_ccser1[[4]], res_10k_ccser1E15[[4]],bs0=10000,binned=T)
-# 0.9765258
+# 0.9767606
 cor.rfd.test2(res_10k_ccser1E14[[4]], res_10k_ccser1E15[[4]],bs0=10000,binned=T)
-# 0.9672703
+# 0.968008
 
 ### exporting session info
 library("devtools")
