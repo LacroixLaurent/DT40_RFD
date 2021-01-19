@@ -200,11 +200,11 @@ rem.t <- cvdmd10krem_tet[DMD-win][[1]]
 cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #	Spearman's rank correlation rho
 #data:  as.numeric(unlist(a)[!is.na(unlist(a)) & !is.na(unlist(b))]) and as.numeric(unlist(b)[!is.na(unlist(a)) & !is.na(unlist(b))])
-#S = 664755, p-value < 2.2e-16
+#S = 664789, p-value < 2.2e-16
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
 #      rho
-#0.5813848
+#0.5813637
 
 
 ## for CCSER1
