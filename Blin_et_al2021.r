@@ -1,5 +1,5 @@
 #### Data treatment for Blin et al 2021
-### LL 20210119
+### LL 20210122
 ### laurent.lacroix@inserm.fr
 
 library("BSgenome.Ggallus.UCSC.galGal4")
@@ -7,8 +7,8 @@ genome <- BSgenome.Ggallus.UCSC.galGal4
 seqinf <- seqinfo(genome)
 
 ### Set your working path
-mypath <- "TypeYourPathHere"
-# mypath <- ""
+#mypath <- "TypeYourPathHere"
+mypath <- ""
 setwd(mypath)
 
 ### Import home made function
@@ -61,11 +61,11 @@ res_10k_dmd <- makeRFD(gr_dmd,bs=10000,lr=20,na2zero=F,bin=T,datatype="OKseq",ex
 cor.rfd.test2(res_10k_dmd[[4]], sm.wtdmd.10k[[4]],bs0=10000,binned=T)
 #	Spearman's rank correlation rho
 #data:  as.numeric(unlist(a)[!is.na(unlist(a)) & !is.na(unlist(b))]) and as.numeric(unlist(b)[!is.na(unlist(a)) & !is.na(unlist(b))])
-#S = 35279, p-value < 2.2e-16
+#S = 35402, p-value < 2.2e-16
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
-#     rho
-#0.831951
+#      rho
+#0.8313638
 
 
 ### try to evaluate the subsampling required to get the same coverage as the combing RFD
@@ -125,12 +125,10 @@ dev.off()
 
 ## REM (I-T profiles, Replication Efficiency Metric)
 # WT DMD
-ori_dmd <- import("data/Ini_wtDMD.bed")
-ter_dmd <- import("data/Ter_wtDMD.bed")
-seqinfo(ori_dmd) <- seqinf
-seqinfo(ter_dmd) <- seqinf
-ori_dmd <- resize(ori_dmd,fix="center",width=1)
-ter_dmd <- resize(ter_dmd,fix="center",width=1)
+ori_dmd0 <- read.xlsx("data/Ini_wtDMD.xlsx",sheet=1,colNames=F)
+ori_dmd <- with(ori_dmd0, GRanges(seqnames=X1,ranges=IRanges(start=X2,end=X3),strand="*",seqinfo=seqinf))
+ter_dmd0 <- read.xlsx("data/Ter_wtDMD.xlsx",sheet=1,colNames=F)
+ter_dmd <- with(ter_dmd0, GRanges(seqnames=X1,ranges=IRanges(start=X2,end=X3),strand="*",seqinfo=seqinf))
 
 bs=10000
 bin10k <- tileGenome(seqinf,tilewidth=bs, cut.last.tile.in.chrom=T)
@@ -144,12 +142,10 @@ cvdmd10krem_wt <- coverage(dmd10k,weight=dmd10k$rem)
 export(cvdmd10krem_wt,con="results/REM_WTDMD_10k_galGal4.bw")
 
 # TET DMD
-ori_dmd <- import("data/Ini_tetDMD.bed")
-ter_dmd <- import("data/Ter_tetDMD.bed")
-seqinfo(ori_dmd) <- seqinf
-seqinfo(ter_dmd) <- seqinf
-ori_dmd <- resize(ori_dmd,fix="center",width=1)
-ter_dmd <- resize(ter_dmd,fix="center",width=1)
+ori_dmd0 <- read.xlsx("data/Ini_tetDMD.xlsx",sheet=1,colNames=F)
+ori_dmd <- with(ori_dmd0, GRanges(seqnames=X1,ranges=IRanges(start=X2,end=X3),strand="*",seqinfo=seqinf))
+ter_dmd0 <- read.xlsx("data/Ter_tetDMD.xlsx",sheet=1,colNames=F)
+ter_dmd <- with(ter_dmd0, GRanges(seqnames=X1,ranges=IRanges(start=X2,end=X3),strand="*",seqinfo=seqinf))
 
 bs=10000
 bin10k <- tileGenome(seqinf,tilewidth=bs, cut.last.tile.in.chrom=T)
@@ -180,11 +176,11 @@ rem.t <- cvdmd10krem_wt[DMD-win][[1]]
 cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #	Spearman's rank correlation rho
 #data:  as.numeric(unlist(a)[!is.na(unlist(a)) & !is.na(unlist(b))]) and as.numeric(unlist(b)[!is.na(unlist(a)) & !is.na(unlist(b))])
-#S = 906425, p-value = 6.527e-11
+#S = 898493, p-value = 3.7e-11
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
 #      rho
-#0.4291981
+#0.4341933
 
 # TET DMD
 cvL <- sm.tetdmd.10k[[2]]
@@ -200,11 +196,11 @@ rem.t <- cvdmd10krem_tet[DMD-win][[1]]
 cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #	Spearman's rank correlation rho
 #data:  as.numeric(unlist(a)[!is.na(unlist(a)) & !is.na(unlist(b))]) and as.numeric(unlist(b)[!is.na(unlist(a)) & !is.na(unlist(b))])
-#S = 664789, p-value < 2.2e-16
+#S = 641143, p-value < 2.2e-16
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
 #      rho
-#0.5813637
+#0.5962542
 
 
 ## for CCSER1
@@ -238,11 +234,11 @@ res_10k_ccser1 <- makeRFD(gr_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatype="OKs
 cor.rfd.test2(res_10k_ccser1[[4]], sm.wtccser1.10k[[4]],bs0=10000,binned=T)
 #	Spearman's rank correlation rho
 #data:  as.numeric(unlist(a)[!is.na(unlist(a)) & !is.na(unlist(b))]) and as.numeric(unlist(b)[!is.na(unlist(a)) & !is.na(unlist(b))])
-#S = 20433, p-value = 4.741e-10
+#S = 20428, p-value = 4.711e-10
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
 #      rho
-#0.6573985
+#0.6574771
 
 
 ### Subsampling
@@ -291,14 +287,11 @@ legend('topright',legend=c('subsampled(n=2500)','single molecule'), text.col=c('
 dev.off()
 
 ## REM (I-T profiles, Replication Efficiency Metric)
-ori_ccser1 <- import("data/Ini_wtCCSER1.bed")
-ter_ccser1 <- import("data/Ter_wtCCSER1.bed")
-seqlevels(ori_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
-seqinfo(ori_ccser1) <- seqinf
-seqlevels(ter_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
-seqinfo(ter_ccser1) <- seqinf
-ori_ccser1 <- resize(ori_ccser1,fix="center",width=1)
-ter_ccser1 <- resize(ter_ccser1,fix="center",width=1)
+ori_ccser1_0 <- read.xlsx("data/Ini_wtCCSER1.xlsx",sheet=1,colNames=F)
+ori_ccser1 <- with(ori_ccser1_0, GRanges(seqnames=X1,ranges=IRanges(start=X2,end=X3),strand="*",seqinfo=seqinf))
+ter_ccser1_0 <- read.xlsx("data/Ter_wtCCSER1.xlsx",sheet=1,colNames=F)
+ter_ccser1 <- with(ter_ccser1_0, GRanges(seqnames=X1,ranges=IRanges(start=X2,end=X3),strand="*",seqinfo=seqinf))
+
 
 
 bs=10000
@@ -313,14 +306,11 @@ cvccser110krem_wt <- coverage(ccser110k,weight=ccser110k$rem)
 export(cvccser110krem_wt,con="results/REM_WTCCSER1_10k_galGal4.bw")
 
 
-ori_ccser1 <- import("data/Ini_betaCCSER1.bed")
-ter_ccser1 <- import("data/Ter_betaCCSER1.bed")
-seqlevels(ori_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
-seqinfo(ori_ccser1) <- seqinf
-seqlevels(ter_ccser1,pruning.mode="coarse") <- seqlevels(seqinf)
-seqinfo(ter_ccser1) <- seqinf
-ori_ccser1 <- resize(ori_ccser1,fix="center",width=1)
-ter_ccser1 <- resize(ter_ccser1,fix="center",width=1)
+ori_ccser1_0 <- read.xlsx("data/Ini_betaCCSER1.xlsx",sheet=1,colNames=F)
+ori_ccser1 <- with(ori_ccser1_0, GRanges(seqnames=X1,ranges=IRanges(start=X2,end=X3),strand="*",seqinfo=seqinf))
+ter_ccser1_0 <- read.xlsx("data/Ter_betaCCSER1.xlsx",sheet=1,colNames=F)
+ter_ccser1 <- with(ter_ccser1_0, GRanges(seqnames=X1,ranges=IRanges(start=X2,end=X3),strand="*",seqinfo=seqinf))
+
 
 bs=10000
 bin10k <- tileGenome(seqinf,tilewidth=bs, cut.last.tile.in.chrom=T)
@@ -350,11 +340,11 @@ rem.t <- cvccser110krem_wt[CCSER1-win][[1]]
 cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #	Spearman's rank correlation rho
 #data:  as.numeric(unlist(a)[!is.na(unlist(a)) & !is.na(unlist(b))]) and as.numeric(unlist(b)[!is.na(unlist(a)) & !is.na(unlist(b))])
-#S = 198105, p-value = 3.604e-12
+#S = 197320, p-value = 2.967e-12
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
 #      rho
-#0.5476937
+#0.5494862
 
 cvL <- sm.betaccser1.10k[[2]]
 cvT <- sm.betaccser1.10k[[1]]
@@ -369,11 +359,11 @@ rem.t <- cvccser110krem_beta[CCSER1-win][[1]]
 cor.rfd.test3(oem.t,rem.t,binned=T,bs0=5000)
 #	Spearman's rank correlation rho
 #data:  as.numeric(unlist(a)[!is.na(unlist(a)) & !is.na(unlist(b))]) and as.numeric(unlist(b)[!is.na(unlist(a)) & !is.na(unlist(b))])
-#S = 179042, p-value = 2.27e-14
+#S = 180713, p-value = 3.648e-14
 #alternative hypothesis: true rho is not equal to 0
 #sample estimates:
 #      rho
-#0.5912191
+#0.5874039
 
 ### Adding two OK seq replicates
 gra14_dmd <- import("data/E14_galGal4_DMD_OKreads_exp.bed")
@@ -401,10 +391,10 @@ res_10k_dmdE15 <- makeRFD(grE15_dmd,bs=10000,lr=20,na2zero=F,bin=T,datatype='OKs
 
 cor.rfd.test2(sm.wtdmd.10k[[4]], res_10k_dmdE14[[4]],bs0=10000,binned=T)
 #      rho
-#0.8112955
+#0.8116755
 cor.rfd.test2(sm.wtdmd.10k[[4]], res_10k_dmdE15[[4]],bs0=10000,binned=T)
 #      rho
-#0.822747
+#0.8238368
 
 cor.rfd.test2(res_10k_dmd[[4]], res_10k_dmdE14[[4]],bs0=10000,binned=T)
 # 0.8799019
@@ -420,10 +410,10 @@ res_10k_ccser1E15 <- makeRFD(grE15_ccser1,bs=10000,lr=20,na2zero=F,bin=T,datatyp
 
 cor.rfd.test2(sm.wtccser1.10k[[4]], res_10k_ccser1E14[[4]],bs0=10000,binned=T)
 #      rho
-#0.6452906
+#0.6448497
 cor.rfd.test2(sm.wtccser1.10k[[4]], res_10k_ccser1E15[[4]],bs0=10000,binned=T)
 #      rho
-#0.6521663
+#0.652245
 
 cor.rfd.test2(res_10k_ccser1[[4]], res_10k_ccser1E14[[4]],bs0=10000,binned=T)
 # .0.9676727
